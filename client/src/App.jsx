@@ -3,6 +3,7 @@ import Signup from "./components/signup";
 import Login from "./components/login";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
+import ExpenseChart from "./components/ExpenseChart";
 import api from "./api/api";
 import "./App.css";
 
@@ -10,7 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [showSignup, setShowSignup] = useState(false);
   const [expenses, setExpenses] = useState([]);
-
+  const [summary, setSummary] = useState({});
   const fetchExpenses = async (userId) => {
     try {
       const res = await api.get(`/expenses/${userId}`);
@@ -19,10 +20,19 @@ function App() {
       console.error("Failed to fetch expenses", err);
     }
   };
+  const fetchSummary = async (userId) => {
+    try {
+      const res = await api.get(`/expenses/monthly/${userId}`);
+      setSummary(res.data);
+    } catch (err) {
+      console.error("Failed to fetch summary", err);
+    }
+  };
 
   useEffect(() => {
     if (user) {
       fetchExpenses(user.user_id);
+      fetchSummary(user.user_id);
     }
   }, [user]);
 
@@ -37,6 +47,7 @@ function App() {
 
   const handleExpenseChange = () => {
     fetchExpenses(user.user_id);
+    fetchSummary(user.user_id);
   };
 
   if (user) {
@@ -52,6 +63,7 @@ function App() {
           expenses={expenses}
           onExpenseDeleted={handleExpenseChange}
         />
+        <ExpenseChart summary={summary} />
       </div>
     );
   }
