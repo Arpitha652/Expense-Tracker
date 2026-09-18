@@ -38,24 +38,27 @@ def signup():
 
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.get_json()
-    email = data.get("email")
-    password = data.get("password")
+    try:
+        data = request.get_json()
+        email = data.get("email")
+        password = data.get("password")
 
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT id, name, password FROM Users WHERE email = %s", (email,))
-    user = cur.fetchone()
-    cur.close()
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id, name, password FROM Users WHERE email = %s", (email,))
+        user = cur.fetchone()
+        cur.close()
 
-    if not user:
-        return jsonify({"error": "User not found"}), 404
+        if not user:
+            return jsonify({"error": "User not found"}), 404
 
-    user_id, name, hashed_password = user
+        user_id, name, hashed_password = user
 
-    if check_password_hash(hashed_password, password):
-        return jsonify({"message": "Login successful", "user_id": user_id, "name": name}), 200
-    else:
-        return jsonify({"error": "Invalid password"}), 401
+        if check_password_hash(hashed_password, password):
+            return jsonify({"message": "Login successful", "user_id": user_id, "name": name}), 200
+        else:
+            return jsonify({"error": "Invalid password"}), 401
+    except Exception as e:
+        return jsonify({"error": "Something went wrong"}), 500
 
 @app.route("/expenses", methods=["POST"])
 def add_expense():

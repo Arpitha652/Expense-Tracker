@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Signup from "./components/signup";
-import Login from "./components/login";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseChart from "./components/ExpenseChart";
@@ -12,6 +12,8 @@ function App() {
   const [showSignup, setShowSignup] = useState(false);
   const [expenses, setExpenses] = useState([]);
   const [summary, setSummary] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const fetchExpenses = async (userId) => {
     try {
       const res = await api.get(`/expenses/${userId}`);
@@ -20,6 +22,7 @@ function App() {
       console.error("Failed to fetch expenses", err);
     }
   };
+
   const fetchSummary = async (userId) => {
     try {
       const res = await api.get(`/expenses/monthly/${userId}`);
@@ -31,8 +34,11 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      fetchExpenses(user.user_id);
-      fetchSummary(user.user_id);
+      setLoading(true);
+      Promise.all([
+        fetchExpenses(user.user_id),
+        fetchSummary(user.user_id),
+      ]).finally(() => setLoading(false));
     }
   }, [user]);
 
@@ -59,11 +65,17 @@ function App() {
           userId={user.user_id}
           onExpenseAdded={handleExpenseChange}
         />
-        <ExpenseList
-          expenses={expenses}
-          onExpenseDeleted={handleExpenseChange}
-        />
-        <ExpenseChart summary={summary} />
+        {loading ? (
+          <p>Loading your expenses...</p>
+        ) : (
+          <>
+            <ExpenseList
+              expenses={expenses}
+              onExpenseDeleted={handleExpenseChange}
+            />
+            <ExpenseChart summary={summary} />
+          </>
+        )}
       </div>
     );
   }

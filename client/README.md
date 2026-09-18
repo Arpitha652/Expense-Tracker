@@ -1,16 +1,68 @@
-# React + Vite
+# 💰 Smart Expense & Budget Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web app to track daily expenses, categorize spending, and visualize monthly budgets with interactive charts.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Frontend: [link after deployment]
+- Backend API: [link after deployment]
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- User authentication (signup/login) with hashed passwords
+- Add, view, and delete expenses
+- Filter expenses by category and date range
+- Monthly spending breakdown visualized as a pie chart
+- Responsive, styled UI
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Frontend:** React.js, Chart.js, Axios
+**Backend:** Python, Flask, Flask-CORS
+**Database:** MySQL
+**Security:** Password hashing with Werkzeug
+
+## Project Structure
+
+## API Endpoints
+
+| Method | Endpoint                      | Description                  |
+| ------ | ----------------------------- | ---------------------------- |
+| POST   | `/signup`                     | Register a new user          |
+| POST   | `/login`                      | Authenticate user            |
+| POST   | `/expenses`                   | Add an expense               |
+| GET    | `/expenses/<user_id>`         | Get all expenses for a user  |
+| DELETE | `/expenses/<id>`              | Delete an expense            |
+| GET    | `/expenses/monthly/<user_id>` | Get monthly spending summary |
+
+## Setup Instructions
+
+### Backend
+
+```bash
+cd server
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+# Create .env with your MySQL credentials (see .env.example)
+python app.py
+```
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+## Future Improvements
+
+- JWT-based session persistence
+- Edit expense functionality
+- Bar chart for spending trends over months
+- Export expenses as CSV/PDF
+
+## Author
+
+Arpitha V Itagi
