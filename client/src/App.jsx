@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Signup from "./components/signup";
+import Login from "./components/login";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseChart from "./components/ExpenseChart";
