@@ -4,104 +4,127 @@
 
 body {
   margin: 0;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background: #f4f5f9;
+  font-family: "Inter", sans-serif;
+  background: #16221b;
+  color: #1c1c1c;
 }
 
 .app-shell {
   min-height: 100vh;
-  padding: 24px 16px;
+  padding: 32px 16px;
 }
 
-/* ---- Auth screen ---- */
+/* ---- Auth: the passbook cover ---- */
 .auth-shell {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #6d5bf5, #8b7cf6);
+  background: radial-gradient(ellipse at top, #1d2e23 0%, #16221b 70%);
 }
 
 .auth-card {
-  background: #fff;
-  padding: 32px 28px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: #f6f1e4;
+  padding: 40px 36px 32px;
+  border-radius: 4px;
+  border-top: 4px solid #c89b3c;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
   width: 100%;
   max-width: 380px;
 }
 
 .auth-card h1 {
-  margin: 0 0 4px;
-  font-size: 1.5rem;
-  color: #4c3fd7;
+  margin: 0 0 6px;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: #16221b;
+  letter-spacing: -0.01em;
 }
 
 .auth-subtitle {
-  margin: 0 0 20px;
-  color: #6b7280;
-  font-size: 0.9rem;
+  margin: 0 0 4px;
+  color: #8a8578;
+  font-size: 0.88rem;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(22, 34, 27, 0.12);
+  margin-bottom: 22px;
 }
 
 .btn-link {
   background: none;
   border: none;
-  color: #6d5bf5;
+  color: #a2762e;
   font-size: 0.85rem;
-  margin-top: 12px;
+  margin-top: 14px;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline dotted;
+  padding: 0;
+  font-family: "Inter", sans-serif;
 }
 
-/* ---- Dashboard ---- */
+/* ---- Dashboard: the open ledger ---- */
 .dashboard {
-  max-width: 900px;
+  max-width: 880px;
   margin: 0 auto;
+  background: #f6f1e4;
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  padding: 32px 36px 40px;
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-end;
+  padding-bottom: 16px;
+  border-bottom: 3px double #16221b;
+  margin-bottom: 24px;
 }
 
 .dashboard-header h1 {
   margin: 0;
-  color: #1f2937;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  color: #16221b;
   font-size: 1.6rem;
 }
 
 .welcome-text {
   margin: 4px 0 0;
-  color: #6b7280;
-  font-size: 0.9rem;
+  color: #8a8578;
+  font-size: 0.88rem;
 }
 
 .btn-ghost {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  padding: 8px 16px;
-  border-radius: 8px;
+  background: none;
+  border: 1px solid #16221b;
+  color: #16221b;
+  padding: 7px 16px;
+  border-radius: 2px;
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: background 0.15s ease;
+  font-size: 0.82rem;
+  font-family: "Inter", sans-serif;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .btn-ghost:hover {
-  background: #f3f4f6;
+  background: #16221b;
+  color: #f6f1e4;
 }
 
 .card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
+  background: #fbf8f1;
+  border: 1px solid rgba(22, 34, 27, 0.1);
+  border-radius: 3px;
+  padding: 20px 22px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   gap: 20px;
 }
 
@@ -111,46 +134,67 @@ body {
 
 .loading-text {
   text-align: center;
-  color: #6b7280;
+  color: #8a8578;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 720px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+  .dashboard {
+    padding: 24px 20px 28px;
+  }
 }
 
-/* ---- Shared form elements (inputs/buttons inside child components) ---- */
+/* ---- Shared form fields: ledger-line inputs, not boxes ---- */
 input,
 select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
+  padding: 8px 2px;
+  border: none;
+  border-bottom: 1px solid rgba(22, 34, 27, 0.25);
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.92rem;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 14px;
+  color: #16221b;
+}
+
+input::placeholder {
+  color: #a8a395;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #6d5bf5;
-  box-shadow: 0 0 0 3px rgba(109, 91, 245, 0.15);
+  border-bottom: 2px solid #c89b3c;
 }
 
 button[type="submit"],
 .btn-primary {
-  background: #6d5bf5;
-  color: #fff;
+  background: #16221b;
+  color: #e8d9a8;
   border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 10px 22px;
+  border-radius: 2px;
+  font-size: 0.88rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
 button[type="submit"]:hover,
 .btn-primary:hover {
-  background: #5b4be0;
+  background: #263a2c;
+}
+
+/* ---- Numbers (amounts) read like a passbook ---- */
+.amount,
+.expense-amount {
+  font-family: "IBM Plex Mono", monospace;
+  font-variant-numeric: tabular-nums;
 }
